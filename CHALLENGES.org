@@ -1,0 +1,110 @@
+#+TITLE: Haskell Challenges by Skill Level
+#+AUTHOR: Your Name
+#+DATE: 2023-11-15
+
+* Level 1: Beginner (Syntax & Basics)              :beginner:
+** TODO Double the List                            :syntax:list:
+   Write a function ~doubleList :: [Int] -> [Int]~ that doubles every element.
+   #+BEGIN_SRC haskell
+     doubleList [1,2,3] == [2,4,6]
+   #+END_SRC
+
+** TODO Evens Only                                 :recursion:
+   Write ~evens :: [Int] -> [Int]~ using recursion (no ~filter~).
+   #+BEGIN_SRC haskell
+     evens [1,2,3,4] == [2,4]
+   #+END_SRC
+
+** TODO Factorial                                  :recursion:edge_case:
+   Write ~factorial :: Int -> Int~ with edge-case handling.
+   #+BEGIN_SRC haskell
+     factorial 5 == 120
+     factorial (-1) == ???  -- Handle gracefully
+   #+END_SRC
+
+* Level 2: Intermediate (Higher-Order Functions, ADTs) :intermediate:
+** TODO Sum of Squares                             :hof:
+   Write ~sumOfSquares :: [Int] -> Int~ using ~map~ and ~foldr~.
+   #+BEGIN_SRC haskell
+     sumOfSquares [1,2,3] == 14
+   #+END_SRC
+
+** TODO Binary Tree Mirror                         :adt:recursion:
+   Define a binary tree type and write ~mirror~.
+   #+BEGIN_SRC haskell
+     data Tree a = Leaf | Node (Tree a) a (Tree a)
+     -- Test case:
+     mirror (Node (Node Leaf 1 Leaf) 2 (Node Leaf 3 Leaf))
+       == Node (Node Leaf 3 Leaf) 2 (Node Leaf 1 Leaf)
+   #+END_SRC
+
+** TODO FizzBuzz                                   :list_comprehension:
+   Write ~fizzBuzz :: [String]~ using list comprehensions.
+   #+BEGIN_SRC haskell
+     take 5 fizzBuzz == ["1","2","Fizz","4","Buzz"]
+   #+END_SRC
+
+* Level 3: Advanced (Monads, Typeclasses)          :advanced:
+** TODO Monadic Fibonacci                          :state_monad:
+   Write ~fib :: Int -> State (Int, Int) Int~.
+   #+BEGIN_SRC haskell
+     evalState (fib 5) (0,1) == 5
+   #+END_SRC
+
+** TODO QuickCheck for Reverse                     :quickcheck:
+   Test ~reverse (reverse xs) == xs~ with edge cases.
+   #+BEGIN_SRC haskell
+     quickCheck (\xs -> reverse (reverse xs) == (xs :: [Int]))
+   #+END_SRC
+
+** TODO DFS with StateT                            :stateT:graph:
+   Implement DFS using ~StateT [Int] []~ to collect paths.
+   #+BEGIN_SRC haskell
+     dfsPaths 1 4 == [[1,2,4], [1,3,4]]
+   #+END_SRC
+
+* Level 4: Expert (Performance, Advanced Types)    :expert:
+** TODO Memoized Fibonacci                         :memoization:
+   Use a lazy infinite list for O(n) ~fib~.
+   #+BEGIN_SRC haskell
+     fib 50 == 12586269025  -- Fast!
+   #+END_SRC
+
+** TODO Free Monad Interpreter                     :free_monad:dsl:
+   Define DSL for arithmetic and write an evaluator.
+   #+BEGIN_SRC haskell
+     prog = do { x <- lit 2; y <- lit 3; add x y }
+     eval prog == Right 5
+   #+END_SRC
+
+** TODO Concurrent Merge Sort                      :concurrency:
+   Parallelize merge sort with ~forkIO~ and ~MVar~.
+   #+BEGIN_SRC haskell
+     concurrentMergeSort [3,1,4,2] == [1,2,3,4]
+   #+END_SRC
+
+* Notes
+- Prioritize by difficulty: 
+  #+ATTR_ORG: :width 30
+  | Priority | Level       |
+  |----------+-------------|
+  | A        | Beginner    |
+  | B        | Intermediate|
+  | C        | Advanced    |
+  | D        | Expert      |
+- Tagged by topic (~:recursion:~, ~:monad:~, etc.).
+
+
+### Features:
+1. **Collapsible Sections**: Fold/unfold levels with `TAB` in Emacs.
+2. **Tags**: Filter by topic (e.g., `:monad:`, `:recursion:`).
+3. **Priority Marks**: A (easiest) to D (hardest).
+4. **Code Blocks**: Syntax-highlighted Haskell examples.
+5. **TODO States**: Track progress (`TODO`/`DONE`).
+
+### How to Use:
+- Open in Emacs with `org-mode`.
+- Press `C-c C-t` to cycle TODO states.
+- Press `C-c C-c` on code blocks to evaluate (if configured with `ob-haskell`).
+
+Want me to adapt this further (e.g., add solutions in collapsed sections)?
